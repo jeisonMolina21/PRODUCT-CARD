@@ -1,0 +1,177 @@
+ /* Estilos CSS completos para evitar dependencias externas */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .card-container {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      width: 300px;
+      overflow: hidden;
+    }
+
+    .hero {
+      position: relative;
+    }
+
+    .availability-toggle {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba(255,255,255,0.9);
+      padding: 8px 12px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 2;
+    }
+
+    .availability-title {
+      font-size: 12px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 20px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 20px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 14px;
+      width: 14px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: #21cc55;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(20px);
+    }
+
+    #productImage {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+      transition: filter 0.3s ease;
+    }
+
+    .content {
+      padding: 20px;
+    }
+
+    .title {
+      margin: 0 0 15px;
+      font-size: 22px;
+      color: #333;
+    }
+
+    .group-options {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .option {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background: white;
+    }
+
+    .description {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .cart {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .price {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .price span {
+      font-size: 10px;
+      color: #999;
+      text-transform: uppercase;
+    }
+
+    .price p {
+      margin: 5px 0 0;
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .btn-cart {
+      padding: 10px 15px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .btn-cart:hover:not(.btn-disabled) {
+      background: #3e8e41;
+    }
+
+    .btn-disabled {
+      background: #cccccc !important;
+      cursor: not-allowed;
+    }
+
+    /* Estilo específico para el estado "Agotado" */
+    .out-of-stock .btn-cart {
+      background: #e74c3c;
+    }
+
+    .out-of-stock .btn-cart.btn-disabled {
+      background: #cccccc !important;
+    }

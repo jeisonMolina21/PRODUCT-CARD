@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.0.9/css/boxicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>Tarjeta de Producto</title>
+</head>
+<body>
+  <div class="card-container" role="region" aria-labelledby="productTitle">
+    <div class="hero">
+      <div class="availability-toggle">
+        <span class="availability-title">Disponible</span>
+        <label class="switch" aria-label="Alternar disponibilidad">
+          <input type="checkbox" id="stockToggle" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+      <img src="producto1.jfif" alt="Nike Running Shoe" id="productImage" loading="lazy">
+    </div>
+
+    <div class="content">
+      <h2 class="title" id="productTitle">Nike Running Shoe</h2>
+
+      <div class="group-options">
+        <select name="size" class="option" aria-label="Talla">
+          <option value="36">EU 36</option>
+          <option value="38">EU 38</option>
+          <option value="48">EU 48</option>
+        </select>
+
+        <select name="color" class="option" aria-label="Color">
+          <option value="black-white">Negro/Blanco</option>
+          <option value="red-yellow">Rojo/Amarillo</option>
+          <option value="green-beige">Verde/Beige</option>
+        </select>
+      </div>
+
+      <p class="description">
+        Zapatillas ligeras para correr con gran amortiguación y diseño moderno.
+      </p>
+
+      <div class="cart">
+        <div class="price">
+          <span>PRECIO</span>
+          <p>$35.99</p>
+        </div>
+        <a href="#" class="btn-cart" id="cartButton">Agregar al carrito</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const toggle = document.getElementById('stockToggle');
+    const cartBtn = document.getElementById('cartButton');
+    const productImg = document.getElementById('productImage');
+    const cardContainer = document.querySelector('.card-container');
+    const availabilityTitle = document.querySelector('.availability-title');
+
+    function updateStockUI(isAvailable) {
+      // Actualizar el texto del botón
+      cartBtn.textContent = isAvailable ? 'Agregar al carrito' : 'Agotado';
+      
+      // Cambiar clases según disponibilidad
+      cartBtn.classList.toggle('btn-disabled', !isAvailable);
+      cardContainer.classList.toggle('out-of-stock', !isAvailable);
+      
+      // Actualizar la imagen
+      productImg.style.filter = isAvailable ? 'none' : 'grayscale(100%)';
+      
+      // Actualizar el texto del toggle
+      availabilityTitle.textContent = isAvailable ? 'Disponible' : 'Agotado';
+      
+      // Habilitar/deshabilitar el toggle (pero mantenerlo visible)
+      toggle.disabled = false;
+      
+      console.log(`Estado actualizado: ${isAvailable ? 'Disponible' : 'Agotado'}`);
+    }
+
+    // Configuración inicial
+    const savedState = localStorage.getItem('stockAvailable');
+    const isAvailable = savedState === null ? true : JSON.parse(savedState);
+    
+    toggle.checked = isAvailable;
+    updateStockUI(isAvailable);
+
+    // Evento de cambio
+    toggle.addEventListener('change', function() {
+      const newState = this.checked;
+      localStorage.setItem('stockAvailable', newState);
+      updateStockUI(newState);
+      
+      // Añadir animación de feedback
+      this.parentElement.animate([
+        { transform: 'scale(1)' },
+        { transform: 'scale(1.1)' },
+        { transform: 'scale(1)' }
+      ], {
+        duration: 300
+      });
+    });
+  </script>
+</body>
+</html>
